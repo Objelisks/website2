@@ -1,6 +1,7 @@
 
 <html>
 <head>
+	<meta charset="utf-8"/>
 <style type="text/css">
 	@import url(http://fonts.googleapis.com/css?family=Inconsolata);
 	
@@ -19,326 +20,110 @@
 		padding-right: 96px;
 	}
 	
-	.text {
-		color: #4E3A4B;
+	h1 {
+		color: #6A5366;
+		font-size: 32pt;
+		margin-bottom: 8px;
+	}
+	
+	h2 {
+		font-size: 24pt;
+	}
+	
+	p {
+		font-size: 16pt;
+	}
+	
+	.header {
+		background-color: #324342;
+		color: #837163;
+	}
+	
+	a {
+		font-size: 16pt;
+	}
+	
+	a:link {
+		color: #8B9957;
+	}
+	
+	a:visited {
+		color: #777E5F;
 	}
 </style>
 </head>
 <body>
 	<div class="header">
+		<h1 class="text">objelisks</h1>
 		<span class="header-btn">projects</span><span class="header-btn">about</span><span class="header-btn">contact</span>
 	</div>
-	<div class="text">objelisks</div>
-	<div id="terrain"></div>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r71/three.min.js" charset="utf-8"></script>
-	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+	<section class="projects">
+		<div>
+			<h2>The Resistance</h2>
+			<p>Web based remake of the board game The Resistance. Fun project with a bunch of cryptography.</p>
+			<img/>
+			<div><a href="https://github.com/Objelisks/resistance">https://github.com/Objelisks/resistance</a></div>
+		</div>
+		<div>
+			<h2>LSystemBot</h2>
+			<p>Twitter bot whom posts randomly generated visualizations of L-Systems.</p>
+			<img/>
+			<div><a href="https://github.com/Objelisks/lsystembot">https://github.com/Objelisks/lsystembot</a></div>
+		</div>
+		<div>
+			<h2>The City & the City</h2>
+			<p>An experiment with shaders inspired by the novel <i>The City & the City</i> by China Miéville.</p>
+			<img/>
+			<div><a href="https://github.com/Objelisks/gemsquad">https://github.com/Objelisks/gemsquad</a></div>
+		</div>
+		<div>
+			<h2>Stone Stealers</h2>
+			<p>Little demake of the LEGO Rock Raiders game in Pico-8.</p>
+			<img/>
+			<div><a href="https://github.com/Objelisks/rocks">https://github.com/Objelisks/rocks</a></div>
+		</div>
+		<div>
+			<h2>Great Dungeon in the Sky</h2>
+			<p>A game I made for the TIGSource Assemblee competition back in 2010.</p>
+			<img/>
+			<div><a href="https://github.com/Objelisks/Great-Dungeon-in-the-Sky">https://github.com/Objelisks/Great-Dungeon-in-the-Sky</a></div>
+		</div>
+	</section>
+	<section class="about">
+		<p>My name is Tim Plummer, and I like to make Things.</p>
+		<p>Résumé: <a href="http://objelisks.github.io/resume/resume.html">http://objelisks.github.io/resume/resume.html</a></p>
+		<p>Github: <a href="https://github.com/Objelisks">https://github.com/Objelisks</a></p>
+	</section>
+	<section class="contact">
+		<p>Email: <a href="mailto:objelisks@gmail.com">objelisks@gmail.com</a></p>
+		<p>Twitter: <a target="_blank" href="https://twitter.com/Objelisks">@Objelisks</a></p>
+	</section>
+	
 	<script>
-		var d3 = d3, THREE = THREE;
-		var headerPos = [];
-		var width = window.innerWidth, height = window.innerHeight;
-		for(var i=0; i<3; i++) {
-			headerPos.push([width * i / 4 + 20, Math.random() * 40 + 10]);
+		
+		
+		function showContent(section) {
+			Array.prototype.forEach.call(document.querySelectorAll('section'), function(item) {
+				item.setAttribute('style', 'display:none');
+			});
+			var item = document.querySelector('.' + section);
+			if(item) {
+				item.setAttribute('style', 'display:block');
+				window.location.hash = section;
+			}
 		}
-		d3.selectAll('.header-btn').data(headerPos).style('transform', 'translate(0px, 0px)').transition().style('transform', function(d, i) {
-			return 'translate(' + d[0] + 'px, ' + d[1] + 'px)';
-		});
-		d3.selectAll('.text').style('transform', 'translate(0px, 0px)').transition().style('transform', 'translate(20px, 20px)');
 		
-		d3.select(window).on('load', function() {
-			var renderer = new THREE.WebGLRenderer({ alpha: true });
-			renderer.setSize(400, 400);
-			document.body.appendChild(renderer.domElement);
-			renderer.autoClear = false;
-			d3.select(renderer.domElement).style('transform', 'translate(0px, 0px)').transition().style('transform', 'translate(20px, 400px)');
-			
-			var camera = new THREE.OrthographicCamera( -1, 1, 1, -1, 0, 1 );
-			var scene  = new THREE.Scene();
-	
-			var shaderMaterial = new THREE.ShaderMaterial({
-				vertexShader: d3.select('#vertex').text(),
-				fragmentShader: d3.select('#fragment').text(),
-				uniforms: {
-					res: {'type': '2f', 'value': [400, 200]},
-					camera: {'type': 'm4', 'value': camera.matrixWorld },
-					time: {'type': 'f', 'value': 0.0 },
-					target: {'type': '2f', 'value': [0, 0]}
-				},
-				attributes: {}
+		Array.prototype.forEach.call(document.querySelectorAll('.header-btn'), function(item) {
+			item.addEventListener('click', function() {
+				showContent(this.textContent);
 			});
-			
-			function setTarget(x, y) {
-				shaderMaterial.uniforms.target.value[0] = x;
-				shaderMaterial.uniforms.target.value[1] = y;
-			}
-			
-			function getTarget() {
-				return shaderMaterial.uniforms.target.value;
-			}
-			
-			d3.select('body').on('click', function() {
-				d3.select('#terrain').transition().duration(2000).ease('poly-in-out', 3)
-					.tween("terrain", function() {
-					var i = d3.interpolate(getTarget(), [Math.random()*10, Math.random()*10]);
-					return function(t) {
-						setTarget(i(t)[0], i(t)[1]);	
-					};
-				});
-			});
-			
-	
-			var quad = new THREE.Mesh(new THREE.PlaneBufferGeometry(2, 2), shaderMaterial);
-			scene.add(quad);
-			
-			var tick = 0;
-	
-			var render = function () {
-				requestAnimationFrame(render);
-				tick += 0.02;
-				shaderMaterial.uniforms.time.value = tick;
-				renderer.render(scene, camera);
-			}
-			render();
 		});
 		
+		if(window.location.hash) {
+			showContent(window.location.hash.slice(1));
+		} else {
+			showContent('none');
+		}
 	</script>
-<script id="vertex" type="vertex">
-varying vec2 vuv;
-
-void main() {
-	vuv = uv;
-	gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-}
-</script>
-<script id="fragment" type="fragment">
-//
-// Description : Array and textureless GLSL 2D simplex noise function.
-//      Author : Ian McEwan, Ashima Arts.
-//  Maintainer : ijm
-//     Lastmod : 20110822 (ijm)
-//     License : Copyright (C) 2011 Ashima Arts. All rights reserved.
-//               Distributed under the MIT License. See LICENSE file.
-//               https://github.com/ashima/webgl-noise
-// 
-
-vec3 mod289(vec3 x) {
-  return x - floor(x * (1.0 / 289.0)) * 289.0;
-}
-
-vec2 mod289(vec2 x) {
-  return x - floor(x * (1.0 / 289.0)) * 289.0;
-}
-
-vec3 permute(vec3 x) {
-  return mod289(((x*34.0)+1.0)*x);
-}
-
-float snoise(vec2 v)
-  {
-  const vec4 C = vec4(0.211324865405187,  // (3.0-sqrt(3.0))/6.0
-                      0.366025403784439,  // 0.5*(sqrt(3.0)-1.0)
-                     -0.577350269189626,  // -1.0 + 2.0 * C.x
-                      0.024390243902439); // 1.0 / 41.0
-// First corner
-  vec2 i  = floor(v + dot(v, C.yy) );
-  vec2 x0 = v -   i + dot(i, C.xx);
-
-// Other corners
-  vec2 i1;
-  //i1.x = step( x0.y, x0.x ); // x0.x > x0.y ? 1.0 : 0.0
-  //i1.y = 1.0 - i1.x;
-  i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
-  // x0 = x0 - 0.0 + 0.0 * C.xx ;
-  // x1 = x0 - i1 + 1.0 * C.xx ;
-  // x2 = x0 - 1.0 + 2.0 * C.xx ;
-  vec4 x12 = x0.xyxy + C.xxzz;
-  x12.xy -= i1;
-
-// Permutations
-  i = mod289(i); // Avoid truncation effects in permutation
-  vec3 p = permute( permute( i.y + vec3(0.0, i1.y, 1.0 ))
-		+ i.x + vec3(0.0, i1.x, 1.0 ));
-
-  vec3 m = max(0.5 - vec3(dot(x0,x0), dot(x12.xy,x12.xy), dot(x12.zw,x12.zw)), 0.0);
-  m = m*m ;
-  m = m*m ;
-
-// Gradients: 41 points uniformly over a line, mapped onto a diamond.
-// The ring size 17*17 = 289 is close to a multiple of 41 (41*7 = 287)
-
-  vec3 x = 2.0 * fract(p * C.www) - 1.0;
-  vec3 h = abs(x) - 0.5;
-  vec3 ox = floor(x + 0.5);
-  vec3 a0 = x - ox;
-
-// Normalise gradients implicitly by scaling m
-// Approximation of: m *= inversesqrt( a0*a0 + h*h );
-  m *= 1.79284291400159 - 0.85373472095314 * ( a0*a0 + h*h );
-
-// Compute final noise value at P
-  vec3 g;
-  g.x  = a0.x  * x0.x  + h.x  * x0.y;
-  g.yz = a0.yz * x12.xz + h.yz * x12.yw;
-  return 130.0 * dot(m, g);
-}
-
-varying vec2 vuv;
-uniform vec2 res;
-uniform mat4 camera;
-uniform float time;
-uniform vec2 target;
-
-const int MAX_STEPS = 150;
-const float EPSILON = 0.01;
-const float PI = 3.14159;
-
-float fbm(vec2 p) {
-    float a = 0.0;
-    float b = 1.0;
-    for( int i=0; i<10; i++ )
-    {
-        float n = snoise(p);
-        a += b*n;
-		b *= 0.5;
-        p = p*2.0;
-    }
-	return a;
-}
-
-float sdCylinder( vec3 p, vec3 c )
-{
-  return length(p.xz-c.xy)-c.z;
-}
-
-float heightmap(vec2 p) {
-	return 0.5+fbm(p/5.0 + target)/5.;
-}
-
-float scene(vec3 p) {
-	return max(sdCylinder(p, vec3(0.0, 0.0, 2.0)), p.y-heightmap(p.xz)+length(p)/10.);
-}
-
-vec3 getNormal(vec3 p, float d) {
-	vec3 n1 = vec3(
-        scene(vec3(p.x + EPSILON, p.y, p.z)),
-        scene(vec3(p.x, p.y + EPSILON, p.z)),
-        scene(vec3(p.x, p.y, p.z + EPSILON))
-    );
-  return normalize(n1 - d);
-}
-
-vec3 light(vec3 diffuse, vec3 normalVector, vec3 lightVector, vec3 lightColor, vec3 ray, vec4 mat) {
-	vec3 halfVector = (lightVector + ray) / normalize(lightVector + ray);
-	
-	// microfacet distribution (normalized)
-	float D = (((1.0 - mat.a)+2.0) / (2.0 * PI)) * pow(max(dot(normalVector, normalVector), 0.0), (1.0 - mat.a));
-	
-	// fresnel component
-	vec3 F = mat.xyz + (1.0 - mat.xyz) * pow(1.0 - max(dot(lightVector, normalVector), 0.0), 5.0);
-	vec3 brdf = D * F; 
-	
-	return PI * (diffuse + brdf) * (lightColor * max(dot(normalVector, lightVector), 0.0));
-}
-
-float softShadow_dir(in vec3 shadingPos, in vec3 lightVector )
-{
-    // real shadows	
-    float penumbra = 1.0;
-    float t = 0.1;
-	
-	for( int i=0; i<48; i++ )
-	{
-	    vec3  p = shadingPos + t * lightVector;
-        float h = scene(p);
-		penumbra = min(penumbra, 16.0 * h / t);
-		t += h;
-		if(penumbra < 0.1) break;
-	}
-	return 1.0 - clamp(penumbra, 0.0, 1.0);
-}
-
-float softShadow_pt(in vec3 shadingPos, in vec3 lightVector, in vec3 lightPos )
-{
-    // real shadows	
-    float penumbra = 1.0;
-    float t = EPSILON;
-	float dist = length(lightPos - shadingPos);
-	
-	for( int i=0; i<48; i++ )
-	{
-	    vec3  p = shadingPos + t * lightVector;
-        float h = scene(p);
-		penumbra = min(penumbra, 16.0 * h / t);
-		t += h;
-		if(penumbra < 0.0001 || t >= dist) break;
-	}
-	return 1.0 - clamp(penumbra, 0.0, 1.0);
-}
-
-void main() {
-	float aspectRatio = res.y / res.x;
-	vec2 coords = (vuv * 2.0 - 1.0) / 2.0;
-	coords.x /= aspectRatio;
-
-	vec3 rayOrigin = (camera * vec4(0.0, 0.8, 3.0, 1.0)).xyz;
-	vec3 rayDirection = (camera * vec4(normalize(vec3(coords, -1.0)), 0.0)).xyz;
-	
-	float pt;
-	float t = 0.5;
-	float distance;
-	float distCone = 0.2;
-	vec3 currentPos;
-	
-	for(int i=0; i<MAX_STEPS; i++) {
-		currentPos = rayOrigin + t * rayDirection;
-		pt = scene(currentPos);
-		t += pt * distCone;
-		if(pt < EPSILON) {
-			break;
-		}
-	}
-	
-	// did not hit any objects, use fog
-	if(pt > EPSILON) {
-		discard;
-	}
-	
-	// lights
-	// diffuse
-	// specular
-	// attenuation
-	// fog
-	// shadow
-	// ambient + occlusion
-	// gamma correction
-	
-	vec4 mat = vec4(vec3(.537, .565, .439), 0.002);
-	
-	vec3 lightPos = vec3(0.0, heightmap(vec2(0.0, 1.0)), 1.0);
-	vec3 light1Vector = normalize(lightPos - currentPos);
-	float light1Dist = length(lightPos - currentPos);
-	vec3 light1Color = vec3(1.0, 0.0, 0.0);
-	float light1Intensity = 0.001;
-	
-	vec3 light2Vector = normalize(vec3(1.0, 0.5, 1.0));
-	vec3 light2Color = vec3(1.0);
-	float light2Intensity = 0.3;
-	
-	vec3 viewVector = normalize(rayOrigin - currentPos);
-	vec3 normalVector = getNormal(currentPos, pt);
-	
-	vec3 diffuse = mat.xyz / PI;
-	
-	vec3 light1 = light(diffuse, normalVector, light1Vector, light1Color, viewVector, mat) - softShadow_pt(currentPos + normalVector*0.2, light1Vector, lightPos);
-	vec3 light2 = light(diffuse, normalVector, light2Vector, light2Color, viewVector, mat) - softShadow_dir(currentPos + normalVector*0.2, light2Vector);
-	light1 = clamp(light1*light1Intensity / (light1Dist*light1Dist*light1Dist), 0.0, 1.0);
-	light2 = clamp(light2*light2Intensity, 0.0, 1.0);
-	
-	vec3 ambient = vec3(0.7) * PI;
-	
-	vec3 color = light1 + light2 + ambient * diffuse;
-	
-	gl_FragColor = vec4(color, 1.0);
-}
-</script>
 </body>
 </html>
