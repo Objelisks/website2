@@ -4,7 +4,7 @@
 	<meta charset="utf-8"/>
 <style type="text/css">
 	@import url(http://fonts.googleapis.com/css?family=Inconsolata);
-	
+
 	body {
 		background-color: #475B5A;
 		color: #A07A5B;
@@ -13,40 +13,40 @@
 		cursor: help;
 		margin: 0px;
 	}
-	
+
 	.header-btn {
 		display: inline-block;
 		padding: 6px;
 		padding-right: 96px;
 	}
-	
+
 	h1 {
 		color: #6A5366;
 		font-size: 32pt;
 		margin-bottom: 8px;
 	}
-	
+
 	h2 {
 		font-size: 24pt;
 	}
-	
+
 	p {
 		font-size: 16pt;
 	}
-	
+
 	.header {
 		background-color: #324342;
 		color: #837163;
 	}
-	
+
 	a {
 		font-size: 16pt;
 	}
-	
+
 	a:link {
 		color: #8B9957;
 	}
-	
+
 	a:visited {
 		color: #777E5F;
 	}
@@ -91,17 +91,17 @@
 	</section>
 	<section class="about">
 		<p>My name is Tim Plummer, and I like to make Things.</p>
-		<p>Résumé: <a href="http://objelisks.github.io/resume/resume.html">http://objelisks.github.io/resume/resume.html</a></p>
+		<p>Résumé: <a href="http://objelisks.github.io/resume/resume2.html">http://objelisks.github.io/resume/resume2.html</a></p>
 		<p>Github: <a href="https://github.com/Objelisks">https://github.com/Objelisks</a></p>
 	</section>
 	<section class="contact">
 		<p>Email: <a href="mailto:objelisks@gmail.com">objelisks@gmail.com</a></p>
 		<p>Twitter: <a target="_blank" href="https://twitter.com/Objelisks">@Objelisks</a></p>
 	</section>
-	
+
 	<script>
-		
-		
+
+
 		function showContent(section) {
 			Array.prototype.forEach.call(document.querySelectorAll('section'), function(item) {
 				item.setAttribute('style', 'display:none');
@@ -112,13 +112,13 @@
 				window.location.hash = section;
 			}
 		}
-		
+
 		Array.prototype.forEach.call(document.querySelectorAll('.header-btn'), function(item) {
 			item.addEventListener('click', function() {
 				showContent(this.textContent);
 			});
 		});
-		
+
 		if(window.location.hash) {
 			showContent(window.location.hash.slice(1));
 		} else {
