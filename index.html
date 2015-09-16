@@ -1,129 +1,131 @@
-
+<!doctype html>
 <html>
 <head>
+	<title>Objelisks The Website</title>
 	<meta charset="utf-8"/>
-<style type="text/css">
-	@import url(http://fonts.googleapis.com/css?family=Inconsolata);
-
-	body {
-		background-color: #475B5A;
-		color: #A07A5B;
-		font-size: 24pt;
-		font-family: 'Inconsolata', 'sans-serif';
-		cursor: help;
-		margin: 0px;
+<style>
+	project-thing {
+		display: flex;
+		margin: 10px;
 	}
-
-	.header-btn {
-		display: inline-block;
-		padding: 6px;
-		padding-right: 96px;
+	project-thing div {
+		max-width: 400px;
+		margin: 6px;
 	}
-
-	h1 {
-		color: #6A5366;
-		font-size: 32pt;
-		margin-bottom: 8px;
-	}
-
-	h2 {
-		font-size: 24pt;
-	}
-
-	p {
-		font-size: 16pt;
-	}
-
-	.header {
-		background-color: #324342;
-		color: #837163;
-	}
-
-	a {
-		font-size: 16pt;
-	}
-
-	a:link {
-		color: #8B9957;
-	}
-
-	a:visited {
-		color: #777E5F;
+	project-thing img {
+		border: 3px solid grey;
 	}
 </style>
 </head>
 <body>
-	<div class="header">
-		<h1 class="text">objelisks</h1>
-		<span class="header-btn">projects</span><span class="header-btn">about</span><span class="header-btn">contact</span>
-	</div>
-	<section class="projects">
+	<h1>Tim Plummer
+		&mdash; <a href="https://twitter.com/objelisks">@Objelisks</a>
+		&mdash; <a href="https://github.com/Objelisks">Github</a>
+		&mdash; <a href="https://objelisks.github.com/resume/resume2.html">Résumé</a></h1>
+	<project-thing>
+		<img src="./img/lsystembot.png"></img>
 		<div>
-			<h2>The Resistance</h2>
-			<p>Web based remake of the board game The Resistance. Fun project with a bunch of cryptography.</p>
-			<img/>
-			<div><a href="https://github.com/Objelisks/resistance">https://github.com/Objelisks/resistance</a></div>
+			<h3>@LSystemBot - <a href="https://twitter.com/LSystemBot">Link</a></h3>
+			<p>LSystemBot procedurally generates short rules for Lindenmeyer systems, renders them, and posts to twitter every hour on the hour. Rendering is currently being done with Paper.js. The idea for this bot was inspired by <a href="https://en.wikipedia.org/wiki/The_Algorithmic_Beauty_of_Plants">this book</a>.</p>
 		</div>
+	</project-thing>
+	<project-thing>
+		<img src="./img/everypunk.png"></img>
 		<div>
-			<h2>LSystemBot</h2>
-			<p>Twitter bot whom posts randomly generated visualizations of L-Systems.</p>
-			<img/>
-			<div><a href="https://github.com/Objelisks/lsystembot">https://github.com/Objelisks/lsystembot</a></div>
+			<h3>@everypunk - <a href="https://twitter.com/everypunk">Link</a></h3>
+			<p>Everypunk is a twitter bot riff on everyword. It ran for a year and finished in 2015. Plans for more fully featured and technologically advanced rerun are in the works.</p>
 		</div>
+	</project-thing>
+	<project-thing>
+		<img src="./img/resistance.png"></img>
 		<div>
-			<h2>The City & the City</h2>
-			<p>An experiment with shaders inspired by the novel <i>The City & the City</i> by China Miéville.</p>
-			<img/>
-			<div><a href="https://github.com/Objelisks/gemsquad">https://github.com/Objelisks/gemsquad</a></div>
+			<h3>The Resistance - <a href="http://objelisks.github.io/resistance/resistance.html">Link</a></h3>
+			<p>This project is a web based remake of the board game <a href="https://boardgamegeek.com/boardgame/41114/resistance">The Resistance</a>.
+			I started working on this as a way to play with cryptography and peer to peer networking.
+			Cool commutative encryption and fancy card passing protocols.
+			</p>
 		</div>
+	</project-thing>
+	<project-thing>
+		<img src="./img/gdits.png"></img>
 		<div>
-			<h2>Stone Stealers</h2>
-			<p>Little demake of the LEGO Rock Raiders game in Pico-8.</p>
-			<img/>
-			<div><a href="https://github.com/Objelisks/rocks">https://github.com/Objelisks/rocks</a></div>
+			<h3>Great Dungeon in the Sky - <a href="http://www.kongregate.com/games/LordTim/great-dungeon-in-the-sky">Link</a></h3>
+			<p>
+				This is a little AS3 game I made back in 2010 for the TIGSource Assemblee competition.
+				It got like 9th out of about 150? Pretty cool. Assets are not made by me.
+			</p>
 		</div>
+	</project-thing>
+	<project-thing>
+		<img src="./img/primerl.png"></img>
 		<div>
-			<h2>Great Dungeon in the Sky</h2>
-			<p>A game I made for the TIGSource Assemblee competition back in 2010.</p>
-			<img/>
-			<div><a href="https://github.com/Objelisks/Great-Dungeon-in-the-Sky">https://github.com/Objelisks/Great-Dungeon-in-the-Sky</a></div>
+			<h3>PrimeRL - <a href="http://objelisks.github.io/primerl/index.html">Link</a></h3>
+			<p>
+				Metroid Prime demake as a roguelike.
+				Features different beams, visors, and atmospheric level generation.
+				Made for 7drl.
+			</p>
 		</div>
-	</section>
-	<section class="about">
-		<p>My name is Tim Plummer, and I like to make Things.</p>
-		<p>Résumé: <a href="http://objelisks.github.io/resume/resume2.html">http://objelisks.github.io/resume/resume2.html</a></p>
-		<p>Github: <a href="https://github.com/Objelisks">https://github.com/Objelisks</a></p>
-	</section>
-	<section class="contact">
-		<p>Email: <a href="mailto:objelisks@gmail.com">objelisks@gmail.com</a></p>
-		<p>Twitter: <a target="_blank" href="https://twitter.com/Objelisks">@Objelisks</a></p>
-	</section>
-
-	<script>
-
-
-		function showContent(section) {
-			Array.prototype.forEach.call(document.querySelectorAll('section'), function(item) {
-				item.setAttribute('style', 'display:none');
-			});
-			var item = document.querySelector('.' + section);
-			if(item) {
-				item.setAttribute('style', 'display:block');
-				window.location.hash = section;
-			}
-		}
-
-		Array.prototype.forEach.call(document.querySelectorAll('.header-btn'), function(item) {
-			item.addEventListener('click', function() {
-				showContent(this.textContent);
-			});
-		});
-
-		if(window.location.hash) {
-			showContent(window.location.hash.slice(1));
-		} else {
-			showContent('none');
-		}
-	</script>
+	</project-thing>
+	<project-thing>
+		<img src="./img/giants.png"></img>
+		<div>
+			<h3>Giants - <a href="http://www.lexaloffle.com/bbs/?tid=2317">Link</a></h3>
+			<p>
+				I made this short, barely playable game in 48 hours for Ludum Dare 33.
+				It's got some basic collision and item collection and multiple scenes.
+				Built using Pico-8.
+			</p>
+		</div>
+	</project-thing>
+	<project-thing>
+		<img src="./img/rocks.png"></img>
+		<div>
+			<h3>Stone Stealers - <a href="http://www.lexaloffle.com/bbs/?tid=2042">Link</a></h3>
+			<p>
+				This is a work in progress demake of the PC game LEGO Rock Raiders.
+				The game fits pathfinding, autotiling, and worker AI into the small Pico-8 code limit. 
+			</p>
+		</div>
+	</project-thing>
+	<project-thing>
+		<img src="./img/picomon.png"></img>
+		<div>
+			<h3>Picomon - <a href="https://github.com/Objelisks/picomon">Link</a></h3>
+			<p>
+				Another wip Pico-8 based pokemonish platformer game.
+				Fits in 60ish monsters with unique procedural names and sounds.
+			</p>
+		</div>
+	</project-thing>
+	<project-thing>
+		<img src="./img/combo.png"></img>
+		<div>
+			<h3>Combo - <a href="https://github.com/Objelisks/combo">Link</a></h3>
+			<p>
+				A javascript based game engine supporting input, enemies, items, tiles, and modular interactions between each object.
+				Based on top of the Phaser library.
+			</p>
+		</div>
+	</project-thing>
+	<project-thing>
+		<img src="./img/astro.png"></img>
+		<div>
+			<h3>Astromancer - <a href="https://github.com/Objelisks/ld30">Link</a></h3>
+			<p>
+				Ludum Dare 30 game. 3D game in javascript. Involves shaders, collision, and some ui stuff.
+			</p>
+		</div>
+	</project-thing>
+	<project-thing>
+		<img src="./img/sticks.png"></img>
+		<div>
+			<h3>Sticks - <a href="https://github.com/Objelisks/babel">Link</a></h3>
+			<p>
+				Prototype game about exploring forests and hitting trees with sticks.
+				Has a heightmap editor with node.js based level streaming.
+			</p>
+		</div>
+	</project-thing>
 </body>
 </html>
